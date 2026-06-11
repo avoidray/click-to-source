@@ -1,0 +1,65 @@
+{
+  "name": "click-to-source",
+  "version": "0.1.1",
+  "description": "Alt+click any element to open its source in VS Code",
+  "author": "avoidray",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avoidray/click-to-source.git"
+  },
+  "homepage": "https://github.com/avoidray/click-to-source#readme",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./runtime.d.ts",
+      "import": "./runtime.js"
+    },
+    "./vite": {
+      "types": "./vite.d.ts",
+      "import": "./vite.js"
+    },
+    "./astro": {
+      "types": "./astro.d.ts",
+      "import": "./astro.js"
+    },
+    "./babel": {
+      "require": "./babel.cjs"
+    }
+  },
+  "files": [
+    "runtime.js",
+    "runtime.d.ts",
+    "babel.cjs",
+    "vite.js",
+    "vite.d.ts",
+    "astro.js",
+    "astro.d.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "vite-plugin",
+    "babel-plugin",
+    "astro",
+    "astro-integration",
+    "react",
+    "devtools",
+    "vscode"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "astro": ">=3.0.0",
+    "vite": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    },
+    "astro": {
+      "optional": true
+    }
+  }
+}
