@@ -1,6 +1,9 @@
 {
-  "name": "click-to-source",
+  "name": "@avoidray/click-to-source",
   "version": "0.1.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Alt+click any element to open its source in VS Code",
   "author": "avoidray",
   "repository": {

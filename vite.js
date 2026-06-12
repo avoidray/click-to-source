@@ -23,7 +23,7 @@ export function clickToSource(options = {}) {
     },
 
     resolveId(id) {
-      if (id === 'click-to-source') {
+      if (id === '@avoidray/click-to-source') {
         return path.resolve(__dirname, 'runtime.js')
       }
     },

@@ -13,7 +13,7 @@ Alt+click any element to open its source in VS Code.
 ## Install
 
 ```bash
-npm install click-to-source
+npm install @avoidray/click-to-source
 ```
 
 ### Local Development
@@ -34,7 +34,7 @@ pnpm link /path/to/click-to-source
 
 ```ts
 // vite.config.ts
-import { clickToSource } from 'click-to-source/vite'
+import { clickToSource } from '@avoidray/click-to-source/vite'
 
 export default {
   plugins: [clickToSource(), react()]
@@ -43,7 +43,7 @@ export default {
 
 ```ts
 // main.ts
-import 'click-to-source'
+import '@avoidray/click-to-source'
 ```
 
 ## How to Use
