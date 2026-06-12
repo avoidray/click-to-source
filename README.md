@@ -32,8 +32,8 @@ pnpm link /path/to/click-to-source
 
 ### Vite
 
-```js
-// vite.config.js
+```ts
+// vite.config.ts
 import { clickToSource } from 'click-to-source/vite'
 
 export default {
@@ -41,8 +41,8 @@ export default {
 }
 ```
 
-```js
-// main.js
+```ts
+// main.ts
 import 'click-to-source'
 ```
 
