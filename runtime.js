@@ -85,7 +85,9 @@ class ClickToSource extends HTMLElement {
       window.open('https://github.com/avoidray/click-to-source', '_blank', 'noopener')
     }
     this.currentSource = null
-    this.root = document.documentElement.dataset.ctsRoot || ''
+    // Dev injects ctsRoot; prod omits it (no path shipped). On the developer's
+    // own machine, set localStorage.ctsRoot to re-enable vscode links in prod.
+    this.root = document.documentElement.dataset.ctsRoot || localStorage.getItem('ctsRoot') || ''
 
     document.addEventListener('mousemove', (e) => {
       if (!e.altKey) {
@@ -165,16 +167,27 @@ class ClickToSource extends HTMLElement {
     this.clicked = true
 
     const [file, line] = source.value.split(':')
-    const url = `vscode://file${this.root}/${file}:${line}`
     const displayText = source.value
 
     navigator.clipboard.writeText(displayText).catch(() => {})
 
-    this.fileLink.href = url
+    // Without a root (prod, no localStorage opt-in) there is no machine path to
+    // build a vscode:// link, so show the location as plain copyable text.
     this.fileLink.textContent = displayText
-    this.fileLink.onclick = (e) => {
-      e.preventDefault()
-      window.location.href = url
+    if (this.root) {
+      const url = `vscode://file${this.root}/${file}:${line}`
+      this.fileLink.href = url
+      this.fileLink.style.cursor = 'pointer'
+      this.fileLink.style.textDecoration = 'underline'
+      this.fileLink.onclick = (e) => {
+        e.preventDefault()
+        window.location.href = url
+      }
+    } else {
+      this.fileLink.removeAttribute('href')
+      this.fileLink.style.cursor = 'default'
+      this.fileLink.style.textDecoration = 'none'
+      this.fileLink.onclick = null
     }
     this.subtext.textContent = '...'
 
@@ -185,7 +198,9 @@ class ClickToSource extends HTMLElement {
     this.positionTooltip(mouseX, mouseY)
 
     setTimeout(() => this.subtext.textContent = 'Copied to clipboard', 300)
-    setTimeout(() => this.subtext.textContent = 'click to open in VS Code', 1500)
+    if (this.root) {
+      setTimeout(() => this.subtext.textContent = 'click to open in VS Code', 1500)
+    }
   }
 
   hideAll() {

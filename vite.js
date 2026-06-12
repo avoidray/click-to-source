@@ -11,14 +11,15 @@ const ATTR = 'data-cts-loc'
 export function clickToSource(options = {}) {
   const exclude = options.exclude ?? []
   let root = ''
+  let isServe = false
 
   return {
     name: 'click-to-source',
     enforce: 'pre',
-    apply: 'serve',
 
     configResolved(config) {
       root = config.root
+      isServe = config.command === 'serve'
     },
 
     resolveId(id) {
@@ -27,7 +28,11 @@ export function clickToSource(options = {}) {
       }
     },
 
+    // The root is an absolute build-machine path, so it is injected in dev
+    // only. In a production build it is omitted to avoid shipping the path;
+    // the runtime falls back to localStorage.ctsRoot for opt-in vscode links.
     transformIndexHtml() {
+      if (!isServe) return
       return [{
         tag: 'script',
         attrs: { type: 'module' },
