@@ -100,7 +100,7 @@ class ClickToSource extends HTMLElement {
       const source = this.getSource(el)
       if (source) {
         this.currentSource = source
-        const sourceEl = el.closest(`[${ATTR}]`) || el.closest('[data-astro-source-file]')
+        const sourceEl = el.closest(`[${ATTR}]`)
         this.showHover(sourceEl || el, source, e.clientX, e.clientY)
       } else if (!this.clicked) {
         this.hideAll()
@@ -127,18 +127,8 @@ class ClickToSource extends HTMLElement {
   getSource(el) {
     let current = el
     while (current) {
-      // Check for our attribute
       const source = current.getAttribute?.(ATTR)
-      if (source) return { type: 'cts', value: source }
-
-      // Check for Astro's native attributes
-      const astroFile = current.getAttribute?.('data-astro-source-file')
-      const astroLoc = current.getAttribute?.('data-astro-source-loc')
-      if (astroFile && astroLoc) {
-        const line = astroLoc.split(':')[0]
-        return { type: 'astro', file: astroFile, line, value: `${astroFile}:${line}` }
-      }
-
+      if (source) return { value: source }
       current = current.parentElement
     }
     return null
@@ -163,11 +153,7 @@ class ClickToSource extends HTMLElement {
       display: 'block',
     })
 
-    // Show relative path for display
-    const displayText = source.type === 'astro'
-      ? source.file.replace(this.root, '') + ':' + source.line
-      : source.value
-    this.hoverText.textContent = displayText
+    this.hoverText.textContent = source.value
     this.hoverText.style.display = ''
     this.clickContent.style.display = 'none'
     this.tooltip.style.pointerEvents = 'none'
@@ -178,20 +164,9 @@ class ClickToSource extends HTMLElement {
   showClicked(source, mouseX, mouseY) {
     this.clicked = true
 
-    let file, line, url, displayText
-
-    if (source.type === 'astro') {
-      // Astro: file is already absolute
-      file = source.file
-      line = source.line
-      url = `vscode://file${file}:${line}`
-      displayText = file.replace(this.root, '') + ':' + line
-    } else {
-      // Our format: relative path
-      ;[file, line] = source.value.split(':')
-      url = `vscode://file${this.root}/${file}:${line}`
-      displayText = source.value
-    }
+    const [file, line] = source.value.split(':')
+    const url = `vscode://file${this.root}/${file}:${line}`
+    const displayText = source.value
 
     navigator.clipboard.writeText(displayText).catch(() => {})
 

@@ -5,7 +5,7 @@ Alt+click any element to open its source in VS Code.
 > **Note on the name:** There's another project also called
 > [`click-to-source`](https://github.com/mattkawczynski/click-to-source) by
 > [@mattkawczynski](https://github.com/mattkawczynski). Same name, entirely by
-> coincidence — we independently built tools that solve the same problem in
+> coincidence: we independently built tools that solve the same problem in
 > slightly different ways. Theirs is the broader, multi-framework, multi-editor
 > take; this one stays deliberately tiny. Worth a look if your needs go beyond
 > what's here.
@@ -46,40 +46,6 @@ export default {
 import 'click-to-source'
 ```
 
-### Astro
-
-```js
-// astro.config.mjs
-import { defineConfig } from 'astro/config'
-import { clickToSource } from 'click-to-source/astro'
-
-export default defineConfig({
-  integrations: [clickToSource()]
-})
-```
-
-Works with both `.astro` files (uses Astro's native source attributes) and framework components (React, Svelte, Vue).
-
-### Babel (Webpack, Next.js, CRA, etc.)
-
-```js
-// babel.config.js
-module.exports = {
-  plugins: ['click-to-source/babel']
-}
-```
-
-```js
-// main.js
-import 'click-to-source'
-```
-
-Set the project root (for VS Code URLs):
-
-```html
-<script>document.documentElement.dataset.ctsRoot = '/absolute/path/to/project'</script>
-```
-
 ## How to Use
 
 1. Hold **Alt** (Option on Mac)
@@ -102,8 +68,6 @@ Set the project root (for VS Code URLs):
 
 ## Options
 
-### Vite
-
 ```js
 clickToSource({
   // Skip files whose module id matches any pattern (substring or RegExp)
@@ -111,36 +75,25 @@ clickToSource({
 })
 ```
 
-### Babel
-
-```js
-['click-to-source/babel', {
-  attribute: 'data-cts-loc'  // customize attribute name
-}]
-```
-
 ## Alternatives
 
 | Feature | click-to-source | [react-dev-inspector](https://github.com/zthxxx/react-dev-inspector) | [click-to-component](https://github.com/ericclemmons/click-to-component) | [LocatorJS](https://www.locatorjs.com/) |
 |---------|-----------------|-------------------|-------------------|-----------|
-| Lines of code | ~400 | ~5000+ | ~1500 | ~2000 |
+| Lines of code | ~250 | ~5000+ | ~1500 | ~2000 |
 | Dependencies | 0 | Many | Few | Few |
 | Build step | None | TypeScript | TypeScript | TypeScript |
 | VS Code | ✅ | ✅ | ✅ | ✅ |
 | Other editors | ❌ | ✅ | ✅ | ✅ |
 | Vite | ✅ | ✅ | ✅ | ✅ |
-| Astro | ✅ | ❌ | ❌ | ❌ |
-| Babel | ✅ | ✅ | ❌ | ✅ |
-| Framework plugins | ❌ | Umi, Next.js | ❌ | ❌ |
 | Browser extension | ❌ | ❌ | ❌ | ✅ |
 | Server required | ❌ | ✅ | ❌ | ❌ |
 
 ## Why use this one?
 
-- **You can read the entire codebase in 5 minutes** — 4 small files, ~400 lines total
-- **Zero dependencies** — nothing to audit, nothing to break
-- **No build step** — plain JS, copy and modify if you want
-- **No server** — uses `vscode://` protocol directly
+- **You can read the entire codebase in 5 minutes**: 2 small files, ~250 lines total
+- **Zero dependencies**: nothing to audit, nothing to break
+- **No build step**: plain JS, copy and modify if you want
+- **No server**: uses `vscode://` protocol directly
 
 ## When to use something else
 
@@ -152,7 +105,7 @@ clickToSource({
 
 ### click-to-edit (planned)
 
-Same idea — but for live editing content:
+Same idea, but for live editing content:
 
 - Pencil icon appears on hover
 - Click to edit text content inline

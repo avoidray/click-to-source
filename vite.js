@@ -37,7 +37,7 @@ export function clickToSource(options = {}) {
     },
 
     transform(code, id) {
-      if (!id.match(/\.[tj]sx$|\.astro$/) || id.includes('node_modules')) return
+      if (!id.match(/\.[tj]sx$/) || id.includes('node_modules')) return
       for (const pattern of exclude) {
         if (typeof pattern === 'string' ? id.includes(pattern) : pattern.test(id)) return
       }

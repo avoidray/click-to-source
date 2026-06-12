@@ -9,6 +9,10 @@
   },
   "homepage": "https://github.com/avoidray/click-to-source#readme",
   "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
   "exports": {
     ".": {
       "types": "./runtime.d.ts",
@@ -17,23 +21,13 @@
     "./vite": {
       "types": "./vite.d.ts",
       "import": "./vite.js"
-    },
-    "./astro": {
-      "types": "./astro.d.ts",
-      "import": "./astro.js"
-    },
-    "./babel": {
-      "require": "./babel.cjs"
     }
   },
   "files": [
     "runtime.js",
     "runtime.d.ts",
-    "babel.cjs",
     "vite.js",
     "vite.d.ts",
-    "astro.js",
-    "astro.d.ts",
     "LICENSE",
     "README.md"
   ],
@@ -42,23 +36,17 @@
   },
   "keywords": [
     "vite-plugin",
-    "babel-plugin",
-    "astro",
-    "astro-integration",
     "react",
     "devtools",
-    "vscode"
+    "vscode",
+    "source"
   ],
   "license": "MIT",
   "peerDependencies": {
-    "astro": ">=3.0.0",
     "vite": ">=4.0.0"
   },
   "peerDependenciesMeta": {
     "vite": {
-      "optional": true
-    },
-    "astro": {
       "optional": true
     }
   }
