@@ -2,6 +2,14 @@
 
 Alt+click any element to open its source in VS Code.
 
+> **Note on the name:** There's another project also called
+> [`click-to-source`](https://github.com/mattkawczynski/click-to-source) by
+> [@mattkawczynski](https://github.com/mattkawczynski). Same name, entirely by
+> coincidence — we independently built tools that solve the same problem in
+> slightly different ways. Theirs is the broader, multi-framework, multi-editor
+> take; this one stays deliberately tiny. Worth a look if your needs go beyond
+> what's here.
+
 ## Install
 
 ```bash
