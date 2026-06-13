@@ -52,7 +52,7 @@ export function clickToSource(options = {}) {
 
       for (let i = 0; i < lines.length; i++) {
         lines[i] = lines[i].replace(
-          /([^a-zA-Z0-9_])<([A-Z][a-zA-Z0-9]*|[a-z][a-zA-Z0-9-]*)(\s|>)/g,
+          /([^a-zA-Z0-9_])<([A-Z][a-zA-Z0-9]*|[a-z][a-zA-Z0-9-]*)(\s(?!\s*extends\b)|>)/g,
           (_, before, tag, after) => {
             const src = `${rel}:${i + 1}`
             return after === '>'
