@@ -52,8 +52,9 @@ import '@avoidray/click-to-source'
 
 ```js
 clickToSource({
-  // Skip files whose module id matches any pattern (substring or RegExp)
-  exclude: ['node_modules/.vite', /\.stories\.[jt]sx?$/],
+  // Skip files whose module id matches any pattern (substring or RegExp).
+  // node_modules and non-JSX files are already skipped automatically.
+  exclude: ['src/vendor/', /\.gen\.[jt]sx$/],
 
   // Keep the overlay up after Alt is released, so it can be screenshotted.
   // Leave off for normal use; turn on only when capturing screenshots.
