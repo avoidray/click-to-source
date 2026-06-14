@@ -5,7 +5,7 @@ function DocumentationSection() {
   return (
     <div id="docs">
       <svg className="icon" role="presentation" aria-hidden="true">
-        <use href="/icons.svg#documentation-icon"></use>
+        <use href={`${import.meta.env.BASE_URL}icons.svg#documentation-icon`}></use>
       </svg>
       <h2>Documentation</h2>
       <p>Your questions, answered</p>
