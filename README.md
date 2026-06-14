@@ -1,5 +1,7 @@
 # click-to-source
 
+**[▶ Try it out](https://avoidray.github.io/click-to-source/)**: open the live demo, hold Alt/Option, and click any element to see its source location.
+
 > **Summary:** Vite plugin + zero-dependency web component. In dev, Alt/Option+click any rendered DOM element to jump straight to its JSX source in VS Code. Build-time plugin stamps `data-cts-loc="file:line"` onto JSX elements; a runtime web component reads the attribute and opens `vscode://file/...`. Install `@avoidray/click-to-source`, add `clickToSource()` to `vite.config` plugins, and `import '@avoidray/click-to-source'` in your entry file. Peer dep: Vite >=4 (optional). React/JSX. No server, no build step, no telemetry.
 
 Alt+click any element to open its source in VS Code.
