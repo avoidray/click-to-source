@@ -10,18 +10,6 @@ Alt+click any element to open its source in VS Code.
 pnpm add @avoidray/click-to-source
 ```
 
-### Local Development
-
-To use a local copy as a dependency:
-
-```bash
-# In your project
-npm link /path/to/click-to-source
-
-# Or with pnpm
-pnpm link /path/to/click-to-source
-```
-
 ## Usage
 
 ### Vite
@@ -79,26 +67,7 @@ clickToSource({
 
 CI runs `npm test` on every push and PR (`.github/workflows/test.yml`, Node 18/20/22).
 
-Releases publish to npm automatically via [trusted publishing](https://docs.npmjs.com/trusted-publishers/) (OIDC). No tokens stored, provenance attached automatically.
-
-**One-time setup** (because trusted publishing can't be configured before a package exists):
-
-1. Publish once from your terminal to create the package:
-   ```bash
-   npm publish --otp=<code>   # requires 2FA enabled on your npm account
-   ```
-2. On npmjs.com → the package → **Settings** → **Trusted Publisher**, add:
-   - Provider: GitHub Actions
-   - Repository: `avoidray/click-to-source`
-   - Workflow: `publish.yml`
-
-**Each release after that:**
-
-1. Bump `version` in `package.json`.
-2. Commit, then cut a GitHub Release (tag e.g. `v0.0.2`).
-3. `.github/workflows/publish.yml` runs tests and publishes. No terminal, no token, no OTP.
-
-Verify a publish: `npm view @avoidray/click-to-source version`.
+Cutting a GitHub Release triggers `.github/workflows/publish.yml`, which tests and publishes to npm via [trusted publishing](https://docs.npmjs.com/trusted-publishers/) (OIDC). No tokens stored, provenance attached automatically.
 
 ## Note on the name
 
