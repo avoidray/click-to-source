@@ -1,14 +1,20 @@
 {
   "name": "@avoidray/click-to-source",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "publishConfig": {
     "access": "public"
   },
   "description": "Alt+click any element to open its source in VS Code",
-  "author": "avoidray",
+  "author": {
+    "name": "avoidray",
+    "url": "https://github.com/avoidray"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/avoidray/click-to-source.git"
+  },
+  "bugs": {
+    "url": "https://github.com/avoidray/click-to-source/issues"
   },
   "homepage": "https://github.com/avoidray/click-to-source#readme",
   "type": "module",
@@ -24,7 +30,8 @@
     "./vite": {
       "types": "./vite.d.ts",
       "import": "./vite.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "runtime.js",
