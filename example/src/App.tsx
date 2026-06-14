@@ -17,9 +17,13 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+          <p style={{ margin: 0, fontFamily: 'var(--mono)', fontSize: 13, color: 'var(--accent)' }}>
+            @avoidray/click-to-source
+          </p>
+          <h1 style={{ margin: '12px 0', fontSize: 32 }}>Try it out</h1>
+          <p style={{ margin: '0 auto', maxWidth: '42ch', lineHeight: 1.5 }}>
+            Hold <code>Alt</code> (<code>Option</code> on Mac), hover any element on this page, then click to reveal its source location. That's the whole library.{' '}
+            <a href="https://github.com/avoidray/click-to-source" target="_blank" rel="noreferrer">View on GitHub</a>
           </p>
         </div>
         <button
