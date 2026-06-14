@@ -88,10 +88,13 @@ class ClickToSource extends HTMLElement {
     // Dev injects ctsRoot; prod omits it (no path shipped). On the developer's
     // own machine, set localStorage.ctsRoot to re-enable vscode links in prod.
     this.root = document.documentElement.dataset.ctsRoot || localStorage.getItem('ctsRoot') || ''
+    // clickToSource({ persistOverlay: true }): keep the overlay up after Alt is
+    // released, for screenshots.
+    this.persistOverlay = document.documentElement.dataset.ctsPersist != null
 
     document.addEventListener('mousemove', (e) => {
       if (!e.altKey) {
-        if (!this.clicked) this.hideAll()
+        if (!this.clicked && !this.persistOverlay) this.hideAll()
         document.body.style.cursor = ''
         return
       }
@@ -121,7 +124,7 @@ class ClickToSource extends HTMLElement {
     document.addEventListener('keyup', (e) => {
       if (e.key === 'Alt') {
         document.body.style.cursor = ''
-        this.hideAll()
+        if (!this.persistOverlay) this.hideAll()
       }
     })
   }

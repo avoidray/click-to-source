@@ -5,11 +5,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ATTR = 'data-cts-loc'
 
 /**
- * @typedef {{ exclude?: (RegExp | string)[] }} ClickToSourceOptions
+ * @typedef {{ exclude?: (RegExp | string)[], persistOverlay?: boolean }} ClickToSourceOptions
  * @type {(options?: ClickToSourceOptions) => import('vite').Plugin}
  */
 export function clickToSource(options = {}) {
   const exclude = options.exclude ?? []
+  const persistOverlay = options.persistOverlay ?? false
   let root = ''
   let isServe = false
 
@@ -36,7 +37,8 @@ export function clickToSource(options = {}) {
       return [{
         tag: 'script',
         attrs: { type: 'module' },
-        children: `document.documentElement.dataset.ctsRoot = ${JSON.stringify(root)};`,
+        children: `document.documentElement.dataset.ctsRoot = ${JSON.stringify(root)};`
+          + (persistOverlay ? `document.documentElement.dataset.ctsPersist = '';` : ''),
         injectTo: 'head-prepend'
       }]
     },

@@ -53,7 +53,11 @@ import '@avoidray/click-to-source'
 ```js
 clickToSource({
   // Skip files whose module id matches any pattern (substring or RegExp)
-  exclude: ['node_modules/.vite', /\.stories\.[jt]sx?$/]
+  exclude: ['node_modules/.vite', /\.stories\.[jt]sx?$/],
+
+  // Keep the overlay up after Alt is released, so it can be screenshotted.
+  // Leave off for normal use; turn on only when capturing screenshots.
+  persistOverlay: true,
 })
 ```
 ## Why use this one?
