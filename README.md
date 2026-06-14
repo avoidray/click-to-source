@@ -1,12 +1,8 @@
 # click-to-source
 
-Alt+click any element to open its source in VS Code.
+> **Summary:** Vite plugin + zero-dependency web component. In dev, Alt/Option+click any rendered DOM element to jump straight to its JSX source in VS Code. Build-time plugin stamps `data-cts-loc="file:line"` onto JSX elements; a runtime web component reads the attribute and opens `vscode://file/...`. Install `@avoidray/click-to-source`, add `clickToSource()` to `vite.config` plugins, and `import '@avoidray/click-to-source'` in your entry file. Peer dep: Vite >=4 (optional). React/JSX. No server, no build step, no telemetry.
 
-> **Note on the name:** There's another project also called
-> [`click-to-source`](https://github.com/mattkawczynski/click-to-source) by
-> [@mattkawczynski](https://github.com/mattkawczynski). Same name, entirely by
-> coincidence: we independently built tools that solve the same problem in
-> slightly different ways.
+Alt+click any element to open its source in VS Code.
 
 ## Install
 
@@ -78,6 +74,39 @@ clickToSource({
 - **Zero dependencies**: nothing to audit, nothing to break
 - **No build step**: plain JS, copy and modify if you want
 - **No server**: uses `vscode://` protocol directly
+
+## Deployment
+
+CI runs `npm test` on every push and PR (`.github/workflows/test.yml`, Node 18/20/22).
+
+Releases publish to npm automatically via [trusted publishing](https://docs.npmjs.com/trusted-publishers/) (OIDC). No tokens stored, provenance attached automatically.
+
+**One-time setup** (because trusted publishing can't be configured before a package exists):
+
+1. Publish once from your terminal to create the package:
+   ```bash
+   npm publish --otp=<code>   # requires 2FA enabled on your npm account
+   ```
+2. On npmjs.com → the package → **Settings** → **Trusted Publisher**, add:
+   - Provider: GitHub Actions
+   - Repository: `avoidray/click-to-source`
+   - Workflow: `publish.yml`
+
+**Each release after that:**
+
+1. Bump `version` in `package.json`.
+2. Commit, then cut a GitHub Release (tag e.g. `v0.0.2`).
+3. `.github/workflows/publish.yml` runs tests and publishes. No terminal, no token, no OTP.
+
+Verify a publish: `npm view @avoidray/click-to-source version`.
+
+## Note on the name
+
+There's another project also called
+[`click-to-source`](https://github.com/mattkawczynski/click-to-source) by
+[@mattkawczynski](https://github.com/mattkawczynski). Same name, entirely by
+coincidence: we independently built tools that solve the same problem in
+slightly different ways.
 
 ## License
 
